@@ -1,0 +1,31 @@
+# AI & Agents
+langchain==0.3.25
+langchain-groq==0.3.2
+langgraph==0.2.73
+langchain-community==0.3.23
+
+# Data Sources
+yfinance==0.2.54
+feedparser==6.0.11
+praw==7.8.1
+duckduckgo-search==6.3.7
+pandas==2.2.3
+numpy==1.26.4
+
+# Backend
+fastapi==0.115.12
+uvicorn==0.34.2
+apscheduler==3.10.4
+sqlalchemy==2.0.41
+psycopg2-binary==2.9.10
+redis==5.2.1
+pydantic==2.11.4
+pydantic-settings==2.8.1
+
+# Telegram
+python-telegram-bot==21.11.1
+
+# Utilities
+python-dotenv==1.1.0
+httpx==0.28.1
+tenacity==9.1.2
