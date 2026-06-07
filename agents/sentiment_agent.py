@@ -4,20 +4,10 @@ from langchain_core.prompts import ChatPromptTemplate
 from tools.reddit_tool import get_reddit_sentiment
 from tools.search_tool import web_search
 from config.settings import settings
-
-_SYSTEM_PROMPT = """คุณเป็นผู้เชี่ยวชาญด้าน sentiment analysis สำหรับตลาดการเงิน
-
-วิเคราะห์ความรู้สึกของนักลงทุนจากโซเชียลมีเดียและอินเตอร์เน็ต:
-1. **Overall Sentiment**: Bullish 🟢 / Bearish 🔴 / Neutral ⚪ (พร้อม % ประมาณ)
-2. **ประเด็นที่พูดถึงมากสุด**: top 3 topics
-3. **Retail vs Institutional**: ความเห็นต่างกันไหม
-4. **Risk signals**: มีสัญญาณ FOMO หรือ Panic ไหม
-5. **สรุป**: ควรระวังอะไร
-
-ตอบเป็นภาษาไทย กระชับและมี emoji ประกอบ"""
+from config.prompts import SENTIMENT_SYSTEM
 
 _PROMPT = ChatPromptTemplate.from_messages([
-    ("system", _SYSTEM_PROMPT),
+    ("system", SENTIMENT_SYSTEM),
     ("human", "{input}"),
     ("placeholder", "{agent_scratchpad}"),
 ])

@@ -4,19 +4,10 @@ from langchain_core.prompts import ChatPromptTemplate
 from tools.rss_tool import get_financial_news, get_thai_market_news
 from tools.search_tool import web_search
 from config.settings import settings
-
-_SYSTEM_PROMPT = """คุณเป็นนักวิเคราะห์ข่าวการเงิน ทำหน้าที่ดึงและวิเคราะห์ข่าวที่กระทบต่อราคาหุ้น
-
-เมื่อวิเคราะห์ข่าวให้:
-1. สรุปข่าวสำคัญ 3-5 ข้อ
-2. ระบุ impact ต่อราคาหุ้น (+/- และเหตุผล)
-3. บอกว่าข่าวนี้ระยะสั้น หรือ ระยะยาว
-4. สรุป sentiment: Positive / Negative / Neutral
-
-ตอบเป็นภาษาไทย กระชับและ actionable"""
+from config.prompts import NEWS_SYSTEM
 
 _PROMPT = ChatPromptTemplate.from_messages([
-    ("system", _SYSTEM_PROMPT),
+    ("system", NEWS_SYSTEM),
     ("human", "{input}"),
     ("placeholder", "{agent_scratchpad}"),
 ])

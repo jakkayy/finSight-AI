@@ -8,34 +8,12 @@ from agents.technical_agent import analyze_technical
 from agents.news_agent import analyze_news
 from agents.sentiment_agent import analyze_sentiment
 from config.settings import settings
+from config.prompts import ORCHESTRATOR_SUMMARY
 
 logger = logging.getLogger(__name__)
 
 _SUMMARY_PROMPT = ChatPromptTemplate.from_messages([
-    ("system", """คุณเป็น chief investment analyst สรุปผลการวิเคราะห์จากทีม 3 คน
-
-รูปแบบรายงาน:
-## 📊 {symbol} — FinSight Report
-
-### 🔧 Technical
-{technical}
-
-### 📰 News & Events
-{news}
-
-### 💬 Sentiment
-{sentiment}
-
----
-### 🎯 สรุปภาพรวม
-[สรุปใน 3-5 ประโยค รวม 3 มิติ]
-
-### 📌 คำแนะนำ
-- Short-term (1-2 สัปดาห์): ...
-- Mid-term (1-3 เดือน): ...
-- ความเสี่ยงหลัก: ...
-
-ตอบเป็นภาษาไทย ใช้ markdown formatting"""),
+    ("system", ORCHESTRATOR_SUMMARY),
     ("human", "สรุปการวิเคราะห์ {symbol}"),
 ])
 

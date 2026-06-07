@@ -3,19 +3,10 @@ from langchain.agents import create_tool_calling_agent, AgentExecutor
 from langchain_core.prompts import ChatPromptTemplate
 from tools.yfinance_tool import get_stock_data
 from config.settings import settings
-
-_SYSTEM_PROMPT = """คุณเป็น technical analyst ผู้เชี่ยวชาญด้านการวิเคราะห์หุ้นและสินทรัพย์ทางการเงิน
-
-เมื่อวิเคราะห์ให้ระบุ:
-1. **แนวโน้ม (Trend)**: ราคาเทียบกับ EMA20 และ EMA50
-2. **Momentum**: RSI (>70 overbought, <30 oversold) และ MACD crossover
-3. **Volume**: ปริมาณซื้อขายผิดปกติหรือไม่
-4. **สรุป**: Bullish / Bearish / Neutral พร้อมเหตุผล
-
-ตอบเป็นภาษาไทย กระชับ ชัดเจน และ actionable"""
+from config.prompts import TECHNICAL_SYSTEM
 
 _PROMPT = ChatPromptTemplate.from_messages([
-    ("system", _SYSTEM_PROMPT),
+    ("system", TECHNICAL_SYSTEM),
     ("human", "{input}"),
     ("placeholder", "{agent_scratchpad}"),
 ])
