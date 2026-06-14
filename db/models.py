@@ -1,5 +1,5 @@
 from datetime import datetime
-from sqlalchemy import Column, Integer, String, Float, DateTime, JSON, ForeignKey, UniqueConstraint
+from sqlalchemy import Column, Integer, String, Float, DateTime, JSON, ForeignKey, UniqueConstraint, null
 from sqlalchemy.orm import relationship
 from db.database import Base
 
@@ -23,6 +23,7 @@ class Watchlist(Base):
     user_id = Column(Integer, ForeignKey("users.id"), nullable=False)
     symbol = Column(String, nullable=False)
     alert_threshold = Column(Float, default=5.0)
+    last_alerted_at = Column(DateTime, nullable=True)
     created_at = Column(DateTime, default=datetime.utcnow)
 
     user = relationship("User", back_populates="watchlist")
