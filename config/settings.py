@@ -4,7 +4,6 @@ from pydantic_settings import BaseSettings
 class Settings(BaseSettings):
     groq_api_key: str
     telegram_bot_token: str
-    telegram_chat_id: str = ""
 
     database_url: str = "postgresql://finsight:finsight@postgres:5432/finsight"
     redis_url: str = "redis://redis:6379"
