@@ -6,7 +6,6 @@ class Settings(BaseSettings):
     telegram_bot_token: str
 
     database_url: str = "postgresql://finsight:finsight@postgres:5432/finsight"
-    redis_url: str = "redis://redis:6379"
 
     reddit_client_id: str = ""
     reddit_client_secret: str = ""
