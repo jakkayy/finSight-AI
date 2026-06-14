@@ -42,8 +42,13 @@ def get_stock_data(symbol: str, period: str = "3mo") -> dict:
     ema50 = float(close.ewm(span=50, adjust=False).mean().iloc[-1])
     macd, macd_signal = _calc_macd(close)
 
-    high_52w = float(hist["High"].tail(252).max())
-    low_52w = float(hist["Low"].tail(252).min())
+    hist_1y = ticker.history(period="1y")
+    if not hist_1y.empty:
+        high_52w = float(hist_1y["High"].max())
+        low_52w = float(hist_1y["Low"].min())
+    else:
+        high_52w = float(hist["High"].max())
+        low_52w = float(hist["Low"].min())
 
     return {
         "symbol": symbol.upper(),
