@@ -15,7 +15,7 @@ _PROMPT = ChatPromptTemplate.from_messages([
 
 def _build_agent() -> AgentExecutor:
     llm = ChatGroq(
-        model="llama-3.1-8b-instant",
+        model="llama-3.3-70b-versatile",
         api_key=settings.groq_api_key,
         temperature=0.1,
     )
