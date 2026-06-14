@@ -5,6 +5,7 @@ from tools.reddit_tool import get_reddit_sentiment
 from tools.search_tool import web_search
 from config.settings import settings
 from config.prompts import SENTIMENT_SYSTEM
+from utils.retry import groq_retry
 
 _PROMPT = ChatPromptTemplate.from_messages([
     ("system", SENTIMENT_SYSTEM),
@@ -27,6 +28,7 @@ def _build_agent() -> AgentExecutor:
 _executor = _build_agent()
 
 
+@groq_retry
 def analyze_sentiment(symbol: str) -> str:
     result = _executor.invoke({
         "input": f"วิเคราะห์ sentiment ของนักลงทุนใน Reddit และอินเตอร์เน็ตสำหรับ {symbol} ในสัปดาห์นี้"

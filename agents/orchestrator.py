@@ -7,6 +7,7 @@ from agents.news_agent import analyze_news
 from agents.sentiment_agent import analyze_sentiment
 from config.settings import settings
 from config.prompts import ORCHESTRATOR_SUMMARY
+from utils.retry import groq_retry
 
 logger = logging.getLogger(__name__)
 
@@ -30,6 +31,7 @@ def _resolve(future: Future, key: str) -> str:
         return _FALLBACKS[key]
 
 
+@groq_retry
 def _summarize(symbol: str, technical: str, news: str, sentiment: str) -> str:
     llm = ChatGroq(
         model="llama-3.3-70b-versatile",

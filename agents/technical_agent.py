@@ -4,6 +4,7 @@ from langchain_core.prompts import ChatPromptTemplate
 from tools.yfinance_tool import get_stock_data
 from config.settings import settings
 from config.prompts import TECHNICAL_SYSTEM
+from utils.retry import groq_retry
 
 _PROMPT = ChatPromptTemplate.from_messages([
     ("system", TECHNICAL_SYSTEM),
@@ -26,6 +27,7 @@ def _build_agent() -> AgentExecutor:
 _executor = _build_agent()
 
 
+@groq_retry
 def analyze_technical(symbol: str) -> str:
     result = _executor.invoke({
         "input": f"วิเคราะห์ {symbol} แบบ technical analysis ให้ครบ บอก trend, RSI, MACD, volume และ recommendation"

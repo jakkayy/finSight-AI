@@ -5,6 +5,7 @@ from tools.rss_tool import get_financial_news, get_thai_market_news
 from tools.search_tool import web_search
 from config.settings import settings
 from config.prompts import NEWS_SYSTEM
+from utils.retry import groq_retry
 
 _PROMPT = ChatPromptTemplate.from_messages([
     ("system", NEWS_SYSTEM),
@@ -27,6 +28,7 @@ def _build_agent() -> AgentExecutor:
 _executor = _build_agent()
 
 
+@groq_retry
 def analyze_news(symbol: str) -> str:
     result = _executor.invoke({
         "input": f"ดึงข่าวล่าสุดเกี่ยวกับ {symbol} และวิเคราะห์ว่ากระทบต่อราคาอย่างไร"
