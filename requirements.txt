@@ -13,8 +13,6 @@ pandas==2.2.3
 numpy==1.26.4
 
 # Backend
-fastapi==0.115.12
-uvicorn==0.34.2
 apscheduler==3.10.4
 sqlalchemy==2.0.41
 psycopg2-binary==2.9.10
